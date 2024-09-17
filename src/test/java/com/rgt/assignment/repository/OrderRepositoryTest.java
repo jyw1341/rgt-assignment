@@ -27,11 +27,9 @@ class OrderRepositoryTest {
     @Autowired
     private RestaurantRepository restaurantRepository;
 
-    private Restaurant restaurant;
-
     @BeforeEach
     void setUp() {
-        restaurant = new Restaurant(123L, "test", 10);
+        Restaurant restaurant = new Restaurant(123L, "test", 10);
         restaurantRepository.save(restaurant);
     }
 
