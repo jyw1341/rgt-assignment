@@ -1,0 +1,73 @@
+### 로그인1
+
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "email": "test1@gmail.com",
+  "password": "1234",
+  "restaurantId": 123,
+  "tableNumber": 1
+}
+
+### 로그인2
+
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "email": "test2@gmail.com",
+  "password": "1234",
+  "restaurantId": 123,
+  "tableNumber": 1
+}
+
+### 로그인3
+
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "email": "test3@gmail.com",
+  "password": "1234",
+  "restaurantId": 123,
+  "tableNumber": 2
+}
+
+### 로그아웃
+POST http://localhost:8080/logout
+
+### 홈
+GET http://localhost:8080
+
+### 주문1
+POST http://localhost:8080/order
+Content-Type: application/json
+
+[
+  {
+    "cartId": 1,
+    "menuId": 1,
+    "orderPrice": 15000,
+    "quantity": 1
+  },
+  {
+    "cartId": 2,
+    "menuId": 2,
+    "orderPrice": 12000,
+    "quantity": 1
+  }
+]
+
+### 주문2
+POST http://localhost:8080/order
+Content-Type: application/json
+
+[
+  {
+    "cartId": 3,
+    "menuId": 3,
+    "orderPrice": 15000,
+    "quantity": 2
+  }
+]
