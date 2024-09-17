@@ -24,5 +24,6 @@ public class Cart {
     @JoinColumn(name = "menu_id")
     private Menu menu;
 
+    @Column(nullable = false)
     private Integer quantity;
 }

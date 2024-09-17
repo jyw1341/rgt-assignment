@@ -20,10 +20,13 @@ public class Menu {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private Integer price;
 
+    @Column(nullable = false)
     private String description;
 
     public Menu(Restaurant restaurant, String name, Integer price, String description) {
