@@ -8,6 +8,7 @@ import lombok.Data;
 public class LoginInfo {
 
     private Long memberId;
+    private String memberName;
     private Long restaurantId;
     private Integer tableNumber;
 }
