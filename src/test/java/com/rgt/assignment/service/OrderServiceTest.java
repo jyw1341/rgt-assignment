@@ -47,7 +47,6 @@ class OrderServiceTest {
         Long memberId = 1L;
         String memberName = "Test User";
         Long menuId = 2L;
-        String menuName = "Pizza";
         int orderPrice = 10000;
         int quantity = 2;
 
