@@ -1,6 +1,7 @@
 package com.rgt.assignment.service;
 
 import com.rgt.assignment.domain.Member;
+import com.rgt.assignment.exception.LoginFailException;
 import com.rgt.assignment.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,6 @@ public class LoginService {
     public Member login(String email, String password) {
         return memberRepository.findByEmail(email)
                 .filter(member -> member.getPassword().equals(password))
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(LoginFailException::new);
     }
 }
