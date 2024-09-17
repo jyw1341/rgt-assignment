@@ -1,5 +1,8 @@
 package com.rgt.assignment.interceptor;
 
+import com.rgt.assignment.constant.SessionConstant;
+import com.rgt.assignment.exception.LoginFailException;
+import com.rgt.assignment.exception.LoginRequiredException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -16,9 +19,9 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         log.info("인증 체크 인터셉터 실행 {}", requestUri);
         HttpSession session = request.getSession();
 
-        if(session == null | session.getAttribute("ll") == null) {
+        if(session == null || session.getAttribute(SessionConstant.LOGIN_INFO) == null) {
             log.info("미인증 사용자 요청");
-            return false;
+            throw new LoginRequiredException();
         }
         return true;
     }
