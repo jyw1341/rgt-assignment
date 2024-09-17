@@ -25,7 +25,7 @@ public class Order {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderMenu> orderMenus = new ArrayList<>();
 
     private Integer tableNumber;
@@ -40,5 +40,10 @@ public class Order {
         this.tableNumber = tableNumber;
         this.status = status;
         this.orderDate = orderDate;
+    }
+
+    public void addOrderMenu(OrderMenu orderMenu) {
+        orderMenus.add(orderMenu);
+        orderMenu.setOrder(this);
     }
 }
