@@ -6,7 +6,7 @@ import com.rgt.assignment.domain.Member;
 import com.rgt.assignment.dto.LoginInfo;
 import com.rgt.assignment.dto.LoginRequest;
 import com.rgt.assignment.exception.LoginFailException;
-import com.rgt.assignment.service.LoginService;
+import com.rgt.assignment.service.AuthService;
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -24,14 +24,14 @@ import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(LoginController.class)
-class LoginControllerTest {
+@WebMvcTest(AuthController.class)
+class AuthControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private LoginService loginService;
+    private AuthService authService;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -53,10 +53,10 @@ class LoginControllerTest {
         String memberName = "Test User";
         Member mockMember = mock(Member.class);
 
-        LoginRequest loginRequest = new LoginRequest(email, password);
+        LoginRequest loginRequest = new LoginRequest(email, password, SessionConstant.RESTAURANT_ID, SessionConstant.TABLE_NUMBER);
         given(mockMember.getId()).willReturn(memberId);
         given(mockMember.getName()).willReturn(memberName);
-        given(loginService.login(email, password)).willReturn(mockMember);
+        given(authService.login(email, password)).willReturn(mockMember);
 
         // when, then
         mockMvc.perform(post("/login")
@@ -80,9 +80,9 @@ class LoginControllerTest {
         // given
         String email = "test@example.com";
         String password = "wrongPassword";
-        LoginRequest loginRequest = new LoginRequest(email, password);
+        LoginRequest loginRequest = new LoginRequest(email, password, SessionConstant.RESTAURANT_ID, SessionConstant.TABLE_NUMBER);
 
-        given(loginService.login(email, password)).willThrow(new LoginFailException());
+        given(authService.login(email, password)).willThrow(new LoginFailException());
 
         // when, then
         mockMvc.perform(post("/login")

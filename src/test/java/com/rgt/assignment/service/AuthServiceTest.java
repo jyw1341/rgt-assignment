@@ -18,13 +18,13 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class LoginServiceTest {
+class AuthServiceTest {
 
     @Mock
     private MemberRepository memberRepository;
 
     @InjectMocks
-    private LoginService loginService;
+    private AuthService authService;
 
     @Test
     @DisplayName("이메일과 비밀번호가 유효할 때 로그인에 성공한다")
@@ -37,7 +37,7 @@ class LoginServiceTest {
         given(memberRepository.findByEmail(email)).willReturn(Optional.of(mockMember));
 
         // when
-        Member result = loginService.login(email, password);
+        Member result = authService.login(email, password);
 
         // then
         assertThat(result).isNotNull();
@@ -55,7 +55,7 @@ class LoginServiceTest {
         given(memberRepository.findByEmail(email)).willReturn(Optional.of(mockMember));
 
         // when then
-        assertThatThrownBy(() -> loginService.login(email, password))
+        assertThatThrownBy(() -> authService.login(email, password))
                 .isInstanceOf(LoginFailException.class);
         verify(memberRepository, times(1)).findByEmail(email);
     }
@@ -69,7 +69,7 @@ class LoginServiceTest {
         given(memberRepository.findByEmail(email)).willReturn(Optional.empty());
 
         // when then
-        assertThatThrownBy(() -> loginService.login(email, password))
+        assertThatThrownBy(() -> authService.login(email, password))
                 .isInstanceOf(LoginFailException.class);
         verify(memberRepository, times(1)).findByEmail(email);
     }
