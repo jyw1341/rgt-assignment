@@ -1,7 +1,9 @@
 package com.rgt.assignment.domain;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -10,8 +12,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders")
-@Getter
-@Setter
+@Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
 
     @Id
@@ -32,4 +34,11 @@ public class Order {
     private OrderStatus status;
 
     private LocalDateTime orderDate;
+
+    public Order(Restaurant restaurant, Integer tableNumber, OrderStatus status, LocalDateTime orderDate) {
+        this.restaurant = restaurant;
+        this.tableNumber = tableNumber;
+        this.status = status;
+        this.orderDate = orderDate;
+    }
 }
