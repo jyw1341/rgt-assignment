@@ -35,9 +35,6 @@ public class LoginArgumentResolver implements HandlerMethodArgumentResolver {
             return null;
         }
 
-        return new LoginInfo(
-                (Long) session.getAttribute(SessionConstant.MEMBER_ID),
-                (Long) session.getAttribute(SessionConstant.RESTAURANT_ID),
-                (Integer) session.getAttribute(SessionConstant.TABLE_NUMBER));
+        return session.getAttribute(SessionConstant.LOGIN_INFO);
     }
 }
