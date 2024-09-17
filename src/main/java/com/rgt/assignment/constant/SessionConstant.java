@@ -1,5 +1,7 @@
 package com.rgt.assignment.constant;
 
 public interface SessionConstant {
-    public static final String LOGIN_INFO = "loginMember";
+    String LOGIN_INFO = "loginMember";
+    Long RESTAURANT_ID = 123L;
+    Integer TABLE_NUMBER = 1;
 }
