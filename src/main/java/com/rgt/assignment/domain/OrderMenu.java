@@ -1,12 +1,14 @@
 package com.rgt.assignment.domain;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
+@Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderMenu {
 
     @Id
@@ -26,8 +28,15 @@ public class OrderMenu {
     @JoinColumn(name = "menu_id")
     private Menu menu;
 
-    private Integer integer;
+    private Integer orderPrice;
 
     private Integer quantity;
 
+    public OrderMenu(Member member, Order order, Menu menu, Integer orderPrice, Integer quantity) {
+        this.member = member;
+        this.order = order;
+        this.menu = menu;
+        this.orderPrice = orderPrice;
+        this.quantity = quantity;
+    }
 }
