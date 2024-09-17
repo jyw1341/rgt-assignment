@@ -4,6 +4,7 @@ import com.rgt.assignment.constant.SessionConstant;
 import com.rgt.assignment.domain.Member;
 import com.rgt.assignment.dto.LoginInfo;
 import com.rgt.assignment.dto.LoginRequest;
+import com.rgt.assignment.dto.LoginSuccessResponse;
 import com.rgt.assignment.service.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -21,7 +22,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public void login(@RequestBody LoginRequest loginRequest, HttpServletRequest servletRequest) {
+    public LoginSuccessResponse login(@RequestBody LoginRequest loginRequest, HttpServletRequest servletRequest) {
         Member member = authService.login(loginRequest.getEmail(), loginRequest.getPassword());
 
         HttpSession session = servletRequest.getSession();
@@ -32,6 +33,8 @@ public class AuthController {
                 loginRequest.getTableNumber()
         );
         session.setAttribute(SessionConstant.LOGIN_INFO, loginInfo);
+
+        return new LoginSuccessResponse(member);
     }
 
     @PostMapping("/logout")
