@@ -1,0 +1,27 @@
+name: Integrate API Server
+
+on:
+  push:
+    branches:
+      - master
+      - dev
+
+jobs:
+  Integration:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: 테스트
+        run: ./gradlew clean test
